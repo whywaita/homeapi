@@ -1,12 +1,12 @@
-// package vars
+package vars
 
 const (
-	JsonHomeLight = `{"format":"raw","freq":38,"data":[...]}`
-	JsonAirConOn  = `{"format":"raw","freq":38,"data":[...]}`
-	JsonAirConOff = `{"format":"raw","freq":38,"data":[...]}`
+	JsonHomeLight = `{"format":"raw","freq":38,"data":[...]}` # toggle home light signal
+	JsonAirConOn  = `{"format":"raw","freq":38,"data":[...]}` # Power On air‐conditioner
+	JsonAirConOff = `{"format":"raw","freq":38,"data":[...]}` # Power Off air‐conditioner
 )
 
 const (
-	ClientKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-	DeviceID  = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	ClientKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # your irkit client key
+	DeviceID  = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" # your irkit device id
 )
