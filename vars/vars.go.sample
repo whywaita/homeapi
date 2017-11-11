@@ -1,0 +1,12 @@
+// package vars
+
+const (
+	JsonHomeLight = `{"format":"raw","freq":38,"data":[...]}`
+	JsonAirConOn  = `{"format":"raw","freq":38,"data":[...]}`
+	JsonAirConOff = `{"format":"raw","freq":38,"data":[...]}`
+)
+
+const (
+	ClientKey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+	DeviceID  = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+)
