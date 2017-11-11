@@ -13,15 +13,16 @@ import (
 
 func Executor(s string) {
 	s = strings.TrimSpace(s)
+	ss := strings.Split(s, " ")
 	if s == "version" {
 		version.Display()
 	} else if s == "quit" || s == "exit" {
 		fmt.Println("Bye!")
 		os.Exit(0)
 		return
-	} else {
-		ss := strings.Split(s, " ")
+	} else if len(ss) == 2 {
 		commandExecutor(ss)
+	} else {
 	}
 
 	return
