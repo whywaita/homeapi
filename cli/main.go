@@ -8,7 +8,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func Start(args []string, logger *zap.Logger) {
+func Start(logger *zap.Logger) {
 	defer fmt.Println("Goodbye!")
 
 	p := prompt.New(
