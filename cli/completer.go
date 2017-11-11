@@ -7,11 +7,15 @@ import (
 )
 
 var commands = []prompt.Suggest{
-	{Text: "light", Description: ""},
-	{Text: "aircon", Description: ""},
+	{Text: "irkit", Description: "irkit commands"},
 	{Text: "version", Description: "Display version"},
 
 	{Text: "exit", Description: "Exit this program"},
+}
+
+var irkitCommands = []prompt.Suggest{
+	{Text: "light", Description: ""},
+	{Text: "aircon", Description: ""},
 }
 
 func Completer(d prompt.Document) []prompt.Suggest {
@@ -32,27 +36,37 @@ func argumentsCompleter(args []string) []prompt.Suggest {
 	if len(args) <= 1 {
 		return prompt.FilterHasPrefix(commands, args[0], true)
 	}
+	if len(args) == 2 {
+		return prompt.FilterHasPrefix(irkitCommands, args[1], true)
+	}
 
 	first := args[0]
 	switch first {
-	case "light":
+	case "irkit":
 		second := args[1]
-		if len(args) == 2 {
-			subcommands := []prompt.Suggest{
-				{Text: "on"},
-				{Text: "off"},
+		switch second {
+		case "light":
+			third := args[2]
+			if len(args) == 3 {
+				subcommands := []prompt.Suggest{
+					{Text: "on"},
+					{Text: "off"},
+				}
+				return prompt.FilterHasPrefix(subcommands, third, true)
 			}
-			return prompt.FilterHasPrefix(subcommands, second, true)
-		}
 
-	case "aircon":
-		second := args[1]
-		if len(args) == 2 {
-			subcommands := []prompt.Suggest{
-				{Text: "on"},
-				{Text: "off"},
+		case "aircon":
+			third := args[2]
+			if len(args) == 3 {
+				subcommands := []prompt.Suggest{
+					{Text: "on"},
+					{Text: "off"},
+				}
+				return prompt.FilterHasPrefix(subcommands, third, true)
 			}
-			return prompt.FilterHasPrefix(subcommands, second, true)
+
+		default:
+			return []prompt.Suggest{}
 		}
 
 	default:
@@ -60,5 +74,4 @@ func argumentsCompleter(args []string) []prompt.Suggest {
 	}
 
 	return []prompt.Suggest{}
-
 }
