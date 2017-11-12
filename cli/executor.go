@@ -46,7 +46,12 @@ func irkitCommandExecutor(s []string) {
 		} else if switchType == "off" {
 			fmt.Println("HomeLight Off...")
 			irkit.HomeLightOff(logger)
+		} else {
+			fmt.Print("invaild command")
 		}
+	} else if commandType == "tvpower" {
+		fmt.Println("TV Power change...")
+		irkit.TVPowerToggle(logger)
 	}
 
 }

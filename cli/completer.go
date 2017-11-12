@@ -14,8 +14,9 @@ var commands = []prompt.Suggest{
 }
 
 var irkitCommands = []prompt.Suggest{
-	{Text: "light", Description: ""},
-	{Text: "aircon", Description: ""},
+	{Text: "light", Description: "change home light"},
+	{Text: "aircon", Description: "change aircon"},
+	{Text: "tvpower", Description: "change TV Power"},
 }
 
 func Completer(d prompt.Document) []prompt.Suggest {
@@ -56,6 +57,16 @@ func argumentsCompleter(args []string) []prompt.Suggest {
 			}
 
 		case "aircon":
+			third := args[2]
+			if len(args) == 3 {
+				subcommands := []prompt.Suggest{
+					{Text: "on"},
+					{Text: "off"},
+				}
+				return prompt.FilterHasPrefix(subcommands, third, true)
+			}
+
+		case "tvpower":
 			third := args[2]
 			if len(args) == 3 {
 				subcommands := []prompt.Suggest{

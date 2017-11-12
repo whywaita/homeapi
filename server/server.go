@@ -28,6 +28,9 @@ func Run(logger *zap.Logger) {
 	rIrkit.HandleFunc("/light/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
 		HomeLight(w, r, logger)
 	})
+	rIrkit.HandleFunc("/tv/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
+		TVPower(w, r, logger)
+	})
 
 	if err := http.ListenAndServe(":8080", router); err != nil {
 		logger.Fatal("[ERROR]", zap.Error(err))

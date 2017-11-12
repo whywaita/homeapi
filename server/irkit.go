@@ -30,3 +30,14 @@ func HomeLight(w http.ResponseWriter, r *http.Request, logger *zap.Logger) {
 		irkit.HomeLightOff(logger)
 	}
 }
+
+func TVPower(w http.ResponseWriter, r *http.Request, logger *zap.Logger) {
+	vars := mux.Vars(r)
+	s := vars["switch"]
+
+	if s == "on" {
+		irkit.TVPowerToggle(logger)
+	} else {
+		irkit.TVPowerToggle(logger)
+	}
+}

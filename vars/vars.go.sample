@@ -4,6 +4,7 @@ const (
 	JsonHomeLight = `{"format":"raw","freq":38,"data":[...]}` # toggle home light signal
 	JsonAirConOn  = `{"format":"raw","freq":38,"data":[...]}` # Power On air‐conditioner
 	JsonAirConOff = `{"format":"raw","freq":38,"data":[...]}` # Power Off air‐conditioner
+  JsonTVPower = `{"format":"raw","freq":38,"data":[...]}` # toggle TV Power
 )
 
 const (

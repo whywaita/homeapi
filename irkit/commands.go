@@ -40,3 +40,10 @@ func HomeLightOff(logger *zap.Logger) {
 		}
 	}
 }
+
+func TVPowerToggle(logger *zap.Logger) {
+	err := SendSignal(vars.JsonTVPower)
+	if err != nil {
+		logger.Warn("TVPower toggle error! :", zap.Error(err))
+	}
+}
