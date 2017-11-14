@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/whywaita/yayoi/irkit"
 
 	"go.uber.org/zap"
 )
@@ -15,21 +16,14 @@ func healthCheck(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, jsonStr)
 }
 
-func Run(logger *zap.Logger) {
+func Run(logger *zap.Logger, deviceList []irkit.Device) {
 	router := mux.NewRouter()
 	router.Path("/health").HandlerFunc(healthCheck)
 
 	rAPI := router.PathPrefix("/api").Subrouter()
 	rIrkit := rAPI.PathPrefix("/irkit").Subrouter()
-
-	rIrkit.HandleFunc("/aircon/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
-		AirCon(w, r, logger)
-	})
-	rIrkit.HandleFunc("/light/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
-		HomeLight(w, r, logger)
-	})
-	rIrkit.HandleFunc("/tv/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
-		TVPower(w, r, logger)
+	rIrkit.HandleFunc("/{device}/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
+		irkitHTTPHandle(w, r, logger, deviceList)
 	})
 
 	if err := http.ListenAndServe(":8080", router); err != nil {

@@ -1,49 +1,58 @@
 package irkit
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/whywaita/yayoi/vars"
-
-	"go.uber.org/zap"
 )
 
-func AirConOn(logger *zap.Logger) {
+func AirConOn() error {
 	err := SendSignal(vars.JsonAirConOn)
 	if err != nil {
-		logger.Warn("AirCon On error! :", zap.Error(err))
+		err = fmt.Errorf("AirCon On error! : %s", err)
+		return err
 	}
-	return
+	return nil
 }
 
-func AirConOff(logger *zap.Logger) {
+func AirConOff() error {
 	err := SendSignal(vars.JsonAirConOff)
 	if err != nil {
-		logger.Warn("AirCon On error! :", zap.Error(err))
+		err = fmt.Errorf("AirCon Off error! : %s", err)
+		return err
+
 	}
-	return
+	return nil
 }
 
-func HomeLightOn(logger *zap.Logger) {
+func HomeLightOn() error {
 	err := SendSignal(vars.JsonHomeLight)
 	if err != nil {
-		logger.Warn("HomeLight On error! :", zap.Error(err))
+		err = fmt.Errorf("HomeLight On error! : %s", err)
+		return err
 	}
-	return
+	return nil
 }
-func HomeLightOff(logger *zap.Logger) {
+func HomeLightOff() error {
 	for i := 0; i < 4; i++ {
 		err := SendSignal(vars.JsonHomeLight)
 		if err != nil {
-			logger.Warn("HomeLight Off error! :", zap.Error(err))
-			time.Sleep(2 * time.Second)
+			err = fmt.Errorf("HomeLight Off error! : %s", err)
+			return err
 		}
+		time.Sleep(2 * time.Second)
 	}
+
+	return nil
 }
 
-func TVPowerToggle(logger *zap.Logger) {
+func TVPowerToggle() error {
 	err := SendSignal(vars.JsonTVPower)
 	if err != nil {
-		logger.Warn("TVPower toggle error! :", zap.Error(err))
+		err = fmt.Errorf("TV Power toggle error! : %s", err)
+		return err
 	}
+
+	return nil
 }

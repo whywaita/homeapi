@@ -5,8 +5,6 @@ import (
 	"os"
 	"strings"
 
-	"go.uber.org/zap"
-
 	"github.com/whywaita/yayoi/irkit"
 	"github.com/whywaita/yayoi/version"
 )
@@ -29,8 +27,6 @@ func Executor(s string) {
 }
 
 func irkitCommandExecutor(s []string) {
-	logger, _ := zap.NewProduction()
-
 	if len(s) != 3 {
 		fmt.Println("irkit's command length must be 3")
 		os.Exit(1)
@@ -42,16 +38,16 @@ func irkitCommandExecutor(s []string) {
 	if commandType == "light" {
 		if switchType == "on" {
 			fmt.Println("HomeLight On...")
-			irkit.HomeLightOn(logger)
+			irkit.HomeLightOn()
 		} else if switchType == "off" {
 			fmt.Println("HomeLight Off...")
-			irkit.HomeLightOff(logger)
+			irkit.HomeLightOff()
 		} else {
 			fmt.Print("invaild command")
 		}
 	} else if commandType == "tvpower" {
 		fmt.Println("TV Power change...")
-		irkit.TVPowerToggle(logger)
+		irkit.TVPowerToggle()
 	}
 
 }

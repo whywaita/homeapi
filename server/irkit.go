@@ -9,35 +9,23 @@ import (
 	"github.com/whywaita/yayoi/irkit"
 )
 
-func AirCon(w http.ResponseWriter, r *http.Request, logger *zap.Logger) {
+func irkitHTTPHandle(w http.ResponseWriter, r *http.Request, logger *zap.Logger, deviceList []irkit.Device) {
+	var err error
 	vars := mux.Vars(r)
 	s := vars["switch"]
+	deviceName := vars["device"]
 
-	if s == "on" {
-		irkit.AirConOn(logger)
-	} else {
-		irkit.AirConOff(logger)
+	for _, device := range deviceList {
+		if deviceName == device.Name {
+			if s == "on" {
+				err = device.OnCommand()
+			} else {
+				err = device.OffCommand()
+			}
+		}
 	}
-}
 
-func HomeLight(w http.ResponseWriter, r *http.Request, logger *zap.Logger) {
-	vars := mux.Vars(r)
-	s := vars["switch"]
-
-	if s == "on" {
-		irkit.HomeLightOn(logger)
-	} else {
-		irkit.HomeLightOff(logger)
-	}
-}
-
-func TVPower(w http.ResponseWriter, r *http.Request, logger *zap.Logger) {
-	vars := mux.Vars(r)
-	s := vars["switch"]
-
-	if s == "on" {
-		irkit.TVPowerToggle(logger)
-	} else {
-		irkit.TVPowerToggle(logger)
+	if err != nil {
+		logger.Warn("[ERROR]", zap.Error(err))
 	}
 }

@@ -2,26 +2,29 @@ package main
 
 import (
 	"flag"
+	"fmt"
 
 	"github.com/whywaita/yayoi/cli"
+	"github.com/whywaita/yayoi/irkit"
 	"github.com/whywaita/yayoi/server"
 	"go.uber.org/zap"
 )
 
 var (
-	mode = flag.String("m", "server", "change mode, cli / server")
+	mode       = flag.String("m", "server", "change mode, cli / server")
+	deviceList = []irkit.Device{}
 )
 
 func main() {
 	logger, _ := zap.NewProduction()
 	flag.Parse()
-
-	_ = Init()
+	deviceList = irkit.Init()
 
 	if *mode == "cli" {
 		cli.Start(logger)
 	} else {
-		server.Run(logger)
+		fmt.Println("Server mode start...")
+		server.Run(logger, deviceList)
 	}
 
 }
