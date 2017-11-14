@@ -33,25 +33,25 @@ $ go build .
 
 ## 使い方
 
-homeapiはサーバモードとCLIモードが存在しています。デフォルトではサーバモードで起動します。
+yayoiはサーバモードとCLIモードが存在しています。デフォルトではサーバモードで起動します。
 
 ### サーバモード
 
 ```
-$ ./homeapi -m server
-$ ./homeapi # どちらでも可能
+$ ./yayoi -m server
+$ ./yayoi # どちらでも可能
 ```
 
 ### CLIモード
 
 ```
-$ ./homeapi -m cli
+$ ./yayoi -m cli
 ```
 
 電気を消す場合は以下のようにします。
 
 ```
-$ ./homeapi -m cli
+$ ./yayoi -m cli
 >>> irkit light off
 HomeLight Off...
 ```

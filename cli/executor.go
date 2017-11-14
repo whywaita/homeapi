@@ -7,8 +7,8 @@ import (
 
 	"go.uber.org/zap"
 
-	"github.com/whywaita/homeapi/irkit"
-	"github.com/whywaita/homeapi/version"
+	"github.com/whywaita/yayoi/irkit"
+	"github.com/whywaita/yayoi/version"
 )
 
 func Executor(s string) {

@@ -3,8 +3,8 @@ package main
 import (
 	"flag"
 
-	"github.com/whywaita/homeapi/cli"
-	"github.com/whywaita/homeapi/server"
+	"github.com/whywaita/yayoi/cli"
+	"github.com/whywaita/yayoi/server"
 	"go.uber.org/zap"
 )
 

@@ -3,7 +3,7 @@ package irkit
 import (
 	"time"
 
-	"github.com/whywaita/homeapi/vars"
+	"github.com/whywaita/yayoi/vars"
 
 	"go.uber.org/zap"
 )

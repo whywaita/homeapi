@@ -5,7 +5,7 @@ import (
 	"net/url"
 	"strings"
 
-	"github.com/whywaita/homeapi/vars"
+	"github.com/whywaita/yayoi/vars"
 )
 
 const (

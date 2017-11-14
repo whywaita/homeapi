@@ -1,6 +1,6 @@
 # Home API
 
-wrapper API for [whywaita](https://github.com/whywaita)'s house.'
+wrapper API for [whywaita](https://github.com/whywaita)'s house.
 
 ## Install
 
@@ -33,25 +33,25 @@ $ go build .
 
 ## Usage
 
-homeapi have two mode (server & CLI). default mode is server.
+yayoi have two mode (server & CLI). default mode is server.
 
 ### Server Mode
 
 ```
-$ ./homeapi -m server
-$ ./homeapi # either possible
+$ ./yayoi -m server
+$ ./yayoi # either possible
 ```
 
 ### CLI Mode
 
 ```
-$ ./homeapi -m cli
+$ ./yayoi -m cli
 ```
 
 if HomeLight down, you can type it.
 
 ```
-$ ./homeapi -m cli
+$ ./yayoi -m cli
 >>> irkit light off
 HomeLight Off...
 ```

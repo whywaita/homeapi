@@ -9,7 +9,7 @@ function build() {
 function deploy() {
   echo "deploy version ${HASH}"
 
-  scp ${BINARY} home:/usr/local/bin/homeapi
+  scp ${BINARY} home:/usr/local/bin/yayoi
 }
 
 ACTION="$1"
@@ -20,7 +20,7 @@ HASH="${HASH:0:8}"
 GOOS="linux"
 GOARCH="amd64"
 
-BINARY="homeapi-${GOOS}-${GOARCH}-${HASH}"
+BINARY="yayoi-${GOOS}-${GOARCH}-${HASH}"
 
 case ${ACTION} in
   "build" ) build ;;

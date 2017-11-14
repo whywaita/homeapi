@@ -6,7 +6,7 @@ import (
 	"go.uber.org/zap"
 
 	"github.com/gorilla/mux"
-	"github.com/whywaita/homeapi/irkit"
+	"github.com/whywaita/yayoi/irkit"
 )
 
 func AirCon(w http.ResponseWriter, r *http.Request, logger *zap.Logger) {
