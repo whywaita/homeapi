@@ -16,6 +16,8 @@ func main() {
 	logger, _ := zap.NewProduction()
 	flag.Parse()
 
+	_ = Init()
+
 	if *mode == "cli" {
 		cli.Start(logger)
 	} else {
