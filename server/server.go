@@ -11,6 +11,10 @@ import (
 	"go.uber.org/zap"
 )
 
+type ErrorJSON struct {
+	Error string `json:"error"`
+}
+
 func healthCheck(w http.ResponseWriter, r *http.Request) {
 	jsonStr := `{"health": "true"}`
 

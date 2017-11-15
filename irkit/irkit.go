@@ -1,5 +1,7 @@
 package irkit
 
+import "encoding/json"
+
 type Device struct {
 	ID         int          `json:"id"`
 	Name       string       `json:"name"`
@@ -30,4 +32,15 @@ func (d *Device) ToUserDevice() UserDevice {
 	u.DescStatus = d.DescStatus
 
 	return u
+}
+
+func (d *Device) UserMarshalJSON() ([]byte, error) {
+	u := d.ToUserDevice()
+
+	jb, err := json.Marshal(u)
+	if err != nil {
+		return nil, err
+	}
+
+	return jb, nil
 }

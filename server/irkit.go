@@ -1,6 +1,8 @@
 package server
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"go.uber.org/zap"
@@ -28,8 +30,15 @@ end:
 
 			if err != nil {
 				logger.Warn("msg", zap.Error(err))
+				ej := ErrorJSON{
+					Error: err.Error(),
+				}
+				jsonBytes, _ := json.Marshal(ej)
+				fmt.Fprintf(w, string(jsonBytes))
 			} else {
-				logger.Info("msg", zap.Bool("status", device.Status))
+				logger.Info("device status change", zap.String("device", device.Name), zap.Bool("status", device.Status))
+				jsonBytes, _ := device.UserMarshalJSON()
+				fmt.Fprintf(w, string(jsonBytes))
 			}
 
 			break end
