@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <HelloWorld/>
+    <YayoiWebUI/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import YayoiWebUI from './components/YayoiWebUI';
 
 export default {
   name: 'app',
   components: {
-    HelloWorld,
+    YayoiWebUI,
   },
 };
 </script>
