@@ -45,3 +45,16 @@ end:
 		}
 	}
 }
+
+func showIRKitDevices(w http.ResponseWriter, r *http.Request, logger *zap.Logger, deviceList []irkit.Device) {
+	var list irkit.UserDeviceList
+	for _, d := range deviceList {
+		u := d.ToUserDevice()
+		list.Devices = append(list.Devices, u)
+	}
+	jb, err := json.Marshal(list)
+	if err != nil {
+		logger.Warn("msg", zap.Error(err))
+	}
+	fmt.Fprintf(w, string(jb))
+}

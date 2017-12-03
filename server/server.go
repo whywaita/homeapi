@@ -1,7 +1,6 @@
 package server
 
 import (
-	"encoding/json"
 	"fmt"
 	"net/http"
 
@@ -31,16 +30,7 @@ func Run(logger *zap.Logger, deviceList []irkit.Device) {
 		irkitHTTPHandle(w, r, logger, deviceList)
 	})
 	rIrkit.HandleFunc("/list", func(w http.ResponseWriter, r *http.Request) {
-		var list irkit.UserDeviceList
-		for _, d := range deviceList {
-			u := d.ToUserDevice()
-			list.Devices = append(list.Devices, u)
-		}
-		jb, err := json.Marshal(list)
-		if err != nil {
-			logger.Warn("msg", zap.Error(err))
-		}
-		fmt.Fprintf(w, string(jb))
+		showIRKitDevices(w, r, logger, deviceList)
 	})
 
 	if err := http.ListenAndServe(":8080", router); err != nil {
