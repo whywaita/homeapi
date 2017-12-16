@@ -1,6 +1,8 @@
 package irkit
 
-import "encoding/json"
+import (
+	"encoding/json"
+)
 
 type Device struct {
 	ID         int          `json:"id"`
@@ -43,4 +45,15 @@ func (d *Device) UserMarshalJSON() ([]byte, error) {
 	}
 
 	return jb, nil
+}
+
+func SearchDeviceByName(name string, list []Device) Device {
+	for _, device := range list {
+		if device.Name == name {
+			return device
+		}
+	}
+
+	// not found
+	return Device{}
 }
