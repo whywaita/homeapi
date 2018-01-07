@@ -30,7 +30,7 @@ HASH="${HASH:0:8}"
 
 case ${STAGE} in
   "develop" ) develop ;;
-  "production" ) production ;;
+  "prod" ) production ;;
   *) echo "Invalid stage"; exit 2;
 esac
 

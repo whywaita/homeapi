@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"go.uber.org/zap"
 
@@ -12,37 +13,39 @@ import (
 )
 
 func irkitHTTPHandle(w http.ResponseWriter, r *http.Request, logger *zap.Logger, deviceList []irkit.Device) {
-	var err error
 	vars := mux.Vars(r)
 	s := vars["switch"] // on or off
 	deviceName := vars["device"]
 
-end:
-	for _, device := range deviceList {
-		if deviceName == device.Name {
-			if s == "on" {
-				err = device.OnCommand()
-				device.Status = true
-			} else {
-				err = device.OffCommand()
-				device.Status = false
-			}
+	device := irkit.SearchDeviceByName(deviceName, deviceList)
 
-			if err != nil {
-				logger.Warn("msg", zap.Error(err))
-				ej := ErrorJSON{
-					Error: err.Error(),
-				}
-				jsonBytes, _ := json.Marshal(ej)
-				fmt.Fprintf(w, string(jsonBytes))
-			} else {
-				logger.Info("device status change", zap.String("device", device.Name), zap.Bool("status", device.Status))
-				jsonBytes, _ := device.UserMarshalJSON()
-				fmt.Fprintf(w, string(jsonBytes))
-			}
+	if (strings.EqualFold(s, "on")) || (strings.EqualFold(s, "off")) {
+		switchIRKitDevice(w, device, s, logger)
+	}
+}
 
-			break end
+func switchIRKitDevice(w http.ResponseWriter, device irkit.Device, s string, logger *zap.Logger) {
+	var err error
+
+	if s == "on" {
+		err = device.OnCommand()
+		device.Status = true
+	} else {
+		err = device.OffCommand()
+		device.Status = false
+	}
+
+	if err != nil {
+		logger.Warn("msg", zap.Error(err))
+		ej := ErrorJSON{
+			Error: err.Error(),
 		}
+		jsonBytes, _ := json.Marshal(ej)
+		fmt.Fprintf(w, string(jsonBytes))
+	} else {
+		logger.Info("device status change", zap.String("device", device.Name), zap.Bool("status", device.Status))
+		jsonBytes, _ := device.UserMarshalJSON()
+		fmt.Fprintf(w, string(jsonBytes))
 	}
 }
 

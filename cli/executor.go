@@ -48,6 +48,16 @@ func irkitCommandExecutor(s []string) {
 	} else if commandType == "tvpower" {
 		fmt.Println("TV Power change...")
 		irkit.TVPowerToggle()
+	} else if commandType == "aircon" {
+		if switchType == "on" {
+			fmt.Println("Aircon On...")
+			irkit.AirConOn()
+		} else if switchType == "off" {
+			fmt.Println("Aircon Off...")
+			irkit.AirConOff()
+		} else {
+			fmt.Print("invaild command")
+		}
 	}
 
 }
