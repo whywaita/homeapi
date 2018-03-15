@@ -23,4 +23,14 @@ export class API {
     return RequestMiddleware(req.get('list'))
       .then(res => res.body);
   }
+
+  static changeDeviceOff(deviceID, req = superagent) {
+    return RequestMiddleware(req.get(`${deviceID}/off`))
+      .then(res => res.body);
+  }
+
+  static changeDeviceOn(deviceID, req = superagent) {
+    return RequestMiddleware(req.get(`${deviceID}/on`))
+      .then(res => res.body);
+  }
 }
