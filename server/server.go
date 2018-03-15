@@ -17,6 +17,7 @@ type ErrorJSON struct {
 func healthCheck(w http.ResponseWriter, r *http.Request) {
 	jsonStr := `{"health": "true"}`
 
+	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprintf(w, jsonStr)
 }
 

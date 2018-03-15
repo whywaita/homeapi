@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  ui:
+    build:
+      context: ui
+    image: yayoi:ui
+    ports:
+      - "8081:8081"
+    restart: always
+    links:
+      - api
+  api:
+    build:
+      context: .
+    image: yayoi:api
+    # env_file: .env
+    depends_on:
+      - redis
+    links:
+      - redis
+    ports:
+      - "8080:8080"
+    tty: true
+  redis:
+    image: redis:3.2.9-alpine
