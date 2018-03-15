@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row" v-for="devices in result">
+    <div class="row" v-for="devices in deviceList">
       <div class="columns medium-3 medium-6" v-for="device in devices">
         <div class="card">
           <div class="card-divider">
@@ -16,25 +16,25 @@
 </template>
 
 <script>
-import axios from 'axios';
-
-const URL_BASE = `${process.env.API_HOST}/api/irkit/`;
+import { API } from '../utils/Api';
 
 export default {
+  name: 'DeviceCard',
   data() {
     return {
-      result: [],
+      devices: {},
     };
   },
-  async created() {
-    const url = 'list';
-    try {
-      const resp = await axios.get(URL_BASE + url);
-      this.result = resp.data;
-    } catch (e) {
-      // eslint-disable-next-line
-      console.error(e);
-    }
+  asyncData: {
+    devicesDefault: {},
+    devices() {
+      return API.getDeviceList();
+    },
+  },
+  computed: {
+    deviceList() {
+      return this.devices;
+    },
   },
 };
 </script>
