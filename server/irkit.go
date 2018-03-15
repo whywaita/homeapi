@@ -26,6 +26,7 @@ func irkitHTTPHandle(w http.ResponseWriter, r *http.Request, logger *zap.Logger,
 
 func switchIRKitDevice(w http.ResponseWriter, device irkit.Device, s string, logger *zap.Logger) {
 	var err error
+	w.Header().Set("Content-Type", "application/json")
 
 	if s == "on" {
 		err = device.OnCommand()
@@ -51,6 +52,8 @@ func switchIRKitDevice(w http.ResponseWriter, device irkit.Device, s string, log
 
 func showIRKitDevices(w http.ResponseWriter, r *http.Request, logger *zap.Logger, deviceList []irkit.Device) {
 	var list irkit.UserDeviceList
+	w.Header().Set("Content-Type", "application/json")
+
 	for _, d := range deviceList {
 		u := d.ToUserDevice()
 		list.Devices = append(list.Devices, u)
