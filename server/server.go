@@ -25,7 +25,8 @@ func Run(logger *zap.Logger, manager irkit.Manager) {
 	router := mux.NewRouter()
 	router.Path("/health").HandlerFunc(healthCheck)
 
-	rIrkit := router.PathPrefix("/irkit").Subrouter()
+	rAPI := router.PathPrefix("/api").Subrouter()
+	rIrkit := rAPI.PathPrefix("/irkit").Subrouter()
 	rIrkit.HandleFunc("/{device}/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
 		irkitHTTPHandle(w, r, logger, manager)
 	})
