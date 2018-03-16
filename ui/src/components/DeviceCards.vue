@@ -6,15 +6,8 @@
           <div class="card-divider">
             {{ device.name }}
           </div>
-          <div v-if="device.status === 'false'"> <!-- off -->
-            <div class="card-section">
-              <a href="#"  v-on:click="dOn(device.name)">OFF</a>
-            </div>
-          </div>
-          <div v-else> <!-- on -->
-            <div class="card-section">
-              <a href="#"  v-on:click="dOff(device.name)">ON</a>
-            </div>
+          <div class="card-section">
+            <a href="#" v-on:click="switchStatus(device.name, device.status)">{{ device.status }}</a>
           </div>
         </div>
       </div>
@@ -65,22 +58,19 @@ export default {
   },
   asyncData: {
     devicesDefault: {},
-    devices() {
-      return API.getDeviceList();
-    },
-  },
-  computed: {
     deviceList() {
-      return this.devices;
+      return API.getDeviceList();
     },
   },
 
   methods: {
-    dOff(id) {
-      API.changeDeviceOff(id);
-    },
-    dOn(id) {
-      API.changeDeviceOn(id);
+    switchStatus(name, status) {
+      if (status === 'false') {
+        // off
+        API.changeDeviceOff(name);
+      } else {
+        API.changeDeviceOn(name);
+      }
     },
   },
 };
