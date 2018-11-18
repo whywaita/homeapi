@@ -62,14 +62,15 @@ export default {
       return API.getDeviceList();
     },
   },
-
   methods: {
     switchStatus(name, status) {
       if (status === 'false') {
         // off
         API.changeDeviceOff(name);
+        this.deviceList[0].status = false;
       } else {
         API.changeDeviceOn(name);
+        this.deviceList[0].status = true;
       }
     },
   },
