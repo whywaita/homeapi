@@ -57,3 +57,17 @@ func SearchDeviceByName(name string, list []Device) Device {
 	// not found
 	return Device{}
 }
+
+func GetIndexValue(name string, m *Manager) int {
+	index := 0
+
+	for _, device := range m.Devices {
+		if device.Name == name {
+			return index
+		}
+
+		index += 1
+	}
+
+	return -1
+}

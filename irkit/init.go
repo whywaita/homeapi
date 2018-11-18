@@ -1,6 +1,6 @@
 package irkit
 
-func Init() []Device {
+func MakeDeviceList() []Device {
 	devices := []Device{}
 
 	light := Device{

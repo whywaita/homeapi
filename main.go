@@ -18,13 +18,14 @@ var (
 func main() {
 	logger, _ := zap.NewProduction()
 	flag.Parse()
-	deviceList = irkit.Init()
+	deviceList = irkit.MakeDeviceList()
+	manager := irkit.NewManager()
 
 	if *mode == "cli" {
 		cli.Start(logger)
 	} else {
 		fmt.Println("Server mode start...")
-		server.Run(logger, deviceList)
+		server.Run(logger, manager)
 	}
 
 }

@@ -3,7 +3,7 @@ import { Emit } from '../utils/EventBus';
 
 async function RequestMiddleware(request) {
   if (request.url[0] !== '/' || request.url.startsWith('http')) {
-    request.url = `/irkit/${request.url}`;
+    request.url = `/api/irkit/${request.url}`;
   }
   request.set('Content-Type', 'application/json');
 

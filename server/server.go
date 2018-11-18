@@ -21,16 +21,17 @@ func healthCheck(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, jsonStr)
 }
 
-func Run(logger *zap.Logger, deviceList []irkit.Device) {
+func Run(logger *zap.Logger, manager irkit.Manager) {
 	router := mux.NewRouter()
 	router.Path("/health").HandlerFunc(healthCheck)
 
-	rIrkit := router.PathPrefix("/irkit").Subrouter()
+	rAPI := router.PathPrefix("/api").Subrouter()
+	rIrkit := rAPI.PathPrefix("/irkit").Subrouter()
 	rIrkit.HandleFunc("/{device}/{switch:on|off}", func(w http.ResponseWriter, r *http.Request) {
-		irkitHTTPHandle(w, r, logger, deviceList)
+		irkitHTTPHandle(w, r, logger, manager)
 	})
 	rIrkit.HandleFunc("/list", func(w http.ResponseWriter, r *http.Request) {
-		showIRKitDevices(w, r, logger, deviceList)
+		showIRKitDevices(w, r, logger, manager)
 	})
 
 	if err := http.ListenAndServe(":8080", router); err != nil {
